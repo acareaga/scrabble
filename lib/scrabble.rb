@@ -1,6 +1,18 @@
 class Scrabble
-  def score(word)
-    0
+
+  attr_reader :word
+
+  def initialize
+    @word = word
+  end
+
+  def score(word, points = [], score = [], total = 0)
+    letters = word.upcase.chars
+    letters.each do |letter|
+      points << point_values.fetch(letter)
+      total = points + score
+    end
+    total.first
   end
 
   def point_values
