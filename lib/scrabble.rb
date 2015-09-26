@@ -6,13 +6,13 @@ class Scrabble
     @word = word
   end
 
-  def score(word, points = [], score = [], total = 0)
+  def score(word, points = [], score = [], total = [])
     letters = word.upcase.chars
     letters.each do |letter|
       points << point_values.fetch(letter)
-      total = points + score
+      score = points + total
     end
-    total.first
+    score.first
   end
 
   def point_values
