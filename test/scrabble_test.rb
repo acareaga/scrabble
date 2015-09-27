@@ -10,24 +10,20 @@ class ScrabbleTest < Minitest::Test
     assert_equal 4, Scrabble.new.score("f")
   end
 
-  def test_it_can_score_a_multi_letter_word
-    game = Scrabble.new.score("Misssippi")
-    assert_equal 15, game
+  def test_it_can_score_multiple_letters
+    assert_equal 15, Scrabble.new.score("Misssippi")
+    assert_equal 41, Scrabble.new.score("QUIZZIFY")
   end
 
-  def test_score_returns_zero_for_integers
-    game = Scrabble.new.score(12345)
-    assert_equal 0, game
+  def test_it_returns_zero_for_invalid_guess
+    assert_equal 0, Scrabble.new.score(10)
+    assert_equal 0, Scrabble.new.score(nil)
+    assert_equal 0, Scrabble.new.score("")
+    assert_equal 0, Scrabble.new.score("hello world")
   end
 
-  def test_it_does_not_score_multiple_words
-    game = Scrabble.new.score("hello world")
-    assert_equal 0, game
-  end
-
-  def test_string_with_invalid_characters
+  def test_invalid_characters_in_string
     skip
-    game = Scrabble.new.score("1milliondollar$")
-    assert_equal 0, game
+    assert_equal 0, Scrabble.new.score("1milliondollar$")
   end
 end

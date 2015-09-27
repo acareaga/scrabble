@@ -1,19 +1,9 @@
-require './lib/player'
 require 'pry'
 
 class Scrabble
-  attr_reader :word, :name, :player_id
-
-  def initialize
-    @name = name
-    @player_id = player_id
-    puts "Alright #{name}, let's play! What is your guess:"
-    word = gets.chomp
-    score(word)
-  end
 
   def score(word, total = 0)
-    if word.nil? || word.class != String || word.include?(" ")
+    if word.nil? || word.class != String || word.chars.include?(" ")
       total
     else
       combine_score(word, total)
@@ -23,7 +13,7 @@ class Scrabble
   def combine_score(word, total)
     word.upcase.each_char { |letter|
       total += point_values.fetch(letter) }
-    puts "Your score for '#{word.upcase}' is: #{total} points"
+    total
   end
 
   def point_values
