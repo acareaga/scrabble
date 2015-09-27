@@ -2,17 +2,19 @@ class Scrabble
 
   attr_reader :word
 
-  def initialize
-    @word = word
+  def score(word, total = 0)
+    if word.nil? || word.class != String
+      # need to prevent integers / random in strings from add_the_score
+      total
+    else
+      add_the_score(word, total)
+    end
   end
 
-  def score(word, points = [], score = [], total = [])
+  def add_the_score(word, total)
     letters = word.upcase.chars
-    letters.each do |letter|
-      points << point_values.fetch(letter)
-      score = points + total
-    end
-    score.first
+    letters.each { |letter| total += point_values.fetch(letter) }
+    total
   end
 
   def point_values
