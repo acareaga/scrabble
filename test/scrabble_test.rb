@@ -11,11 +11,23 @@ class ScrabbleTest < Minitest::Test
   end
 
   def test_it_can_score_a_multi_letter_word
-    game = Scrabble.new.score("Holla")
-    assert_equal 8, game
+    game = Scrabble.new.score("Misssippi")
+    assert_equal 15, game
   end
 
-  def test_it_returns_zero_for_invalid_characters
+  def test_score_returns_zero_for_integers
+    game = Scrabble.new.score(12345)
+    assert_equal 0, game
+  end
 
+  def test_it_does_not_score_multiple_words
+    game = Scrabble.new.score("hello world")
+    assert_equal 0, game
+  end
+
+  def test_string_with_invalid_characters
+    skip
+    game = Scrabble.new.score("1milliondollar$")
+    assert_equal 0, game
   end
 end

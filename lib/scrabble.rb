@@ -1,10 +1,9 @@
 class Scrabble
 
-  attr_reader :word
+  #attr_reader :word
 
   def score(word, total = 0)
-    if word.nil? || word.class != String
-      # need to prevent integers / random in strings from add_the_score
+    if word.nil? || word.class != String || word.include?(" ")
       total
     else
       add_the_score(word, total)
@@ -12,8 +11,8 @@ class Scrabble
   end
 
   def add_the_score(word, total)
-    letters = word.upcase.chars
-    letters.each { |letter| total += point_values.fetch(letter) }
+    word.upcase.each_char { |letter|
+      total += point_values.fetch(letter) }
     total
   end
 
