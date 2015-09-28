@@ -11,9 +11,9 @@ class Scrabble
   end
 
   def combine_score(word, total)
-    word.upcase.each_char { |letter|
-      total += point_values.fetch(letter) }
-    total
+    word.upcase.chars.reduce(total) do |total, letter|
+      total += point_values.fetch(letter)
+    end
   end
 
   def point_values
