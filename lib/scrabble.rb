@@ -1,17 +1,15 @@
 class Scrabble
 
-  def score(guess, total = 0)
-    if guess.nil? || guess.class != String || guess.chars.include?(" ")
+  def score(word, total = 0)
+    if word.nil? || word.class != String || word.chars.include?(" ")
       total
     else
-      combine_score(guess, total)
+      combine_score(word, total)
     end
   end
 
-  def combine_score(guess, total)
-    guess.upcase.chars.reduce(total) do |total, letter|
-      total += point_values.fetch(letter)
-    end
+  def combine_score(word, total)
+    word.upcase.chars.reduce(total) { |total, letter| total += point_values.fetch(letter) }
   end
 
   def point_values
